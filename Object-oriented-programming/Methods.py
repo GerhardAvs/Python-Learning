@@ -1,3 +1,18 @@
+"""
+Metodos
+
+Los objetos creados a partir de clases también contienen
+métodos. Dicho de otra manera, los métodos son funciones
+que pertenecen al objeto.
+
+
+Cada vez que un atributo del objeto sea
+invocado (por ejemplo, en una función),
+debe incluirse self, que refiere a la instancia
+en cuestión, indicando la pertenencia de
+este atributo.
+"""
+
 class Pajaro:
     alas = True
     
