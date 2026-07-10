@@ -9,7 +9,7 @@ una serie de valores.
 
 lista = [1,2,3,4]
 
-for numero in range(1,5): # El 5 no esta incluido
+for numero in range(5): # El 5 no esta incluido
     print(numero)         # Va del 1 al 4
 
 print('\n')
