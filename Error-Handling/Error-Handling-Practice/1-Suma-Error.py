@@ -13,6 +13,10 @@ de errores simple que ante cualquier error, imprima en pantalla el mensaje:
 de la suma entre los dos números.
 """
 
-def suma(num1,num2):
+def suma(num1, num2):
+    try:
+        print(num1 + num2)
+    except:
+        print("Error inesperado")
         
-    print(num1+num2)
+suma(1,'')
