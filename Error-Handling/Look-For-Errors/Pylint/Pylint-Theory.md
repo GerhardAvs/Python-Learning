@@ -1,4 +1,4 @@
-""" 
+
 pylint = linter (Herramienta que checa errores en el codigo)
 
 Pylint es un verificador de código, errores y calidad para
@@ -13,15 +13,7 @@ puntuaciones parciales
 
 A mayor puntaje, mayor será la calidad de tu código.
 Un umbral aceptable será >= 7.00/10
-"""
 
-"""Este modulo imprime algo"""
-def imprimir():
-    """Imprime algo"""
-    numero1 = 500
-    print(numero1)
-
-""" 
 cd C:\...
 pylint File.py -ry
 
@@ -137,4 +129,4 @@ Messages
 
 ------------------------------------------------------------------
 Your code has been rated at 0.00/10 (previous run: 0.00/10, +0.00)
-"""
+
