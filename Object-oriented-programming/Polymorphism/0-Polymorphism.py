@@ -23,7 +23,8 @@ class Oveja:
 vaca1  = Vaca('vaquina')
 oveja1 = Oveja('Ovejina')
 
-'''vaca1.hablar()
+'''
+vaca1.hablar()
 oveja1.hablar()'''
 
 '''animales_granja = [vaca1, oveja1]

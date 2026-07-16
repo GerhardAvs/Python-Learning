@@ -12,6 +12,7 @@ def suma(*args):
         total += numero
     return total
 
+
 def suma2(*args):
     return sum(args)
 

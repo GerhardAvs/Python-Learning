@@ -1,3 +1,4 @@
+
 mi_bool = 5+5 == 18-8
 mi_bool2 = 'Blanco' == 'blanco'
 print(mi_bool)

@@ -6,7 +6,7 @@ tipo de método que se estará definiendo
 -------------------------------------------------------------------------------------------------
      Metodos        l   de instancia   l   de clase @classmethod   l estaticos @staticmethod    l
 ----------------------------------------------------------------------------------------------- l
-acceso a metodos    l      si          l        si                 l        x                   l
+acceso a metodos    l      si          l        si                 l        no                  l
 y atributos de la   l                  l                           l                            l
 clase               l                  l                           l                            l
 ------------------------------------------------------------------------------------------------l

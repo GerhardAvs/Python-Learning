@@ -16,7 +16,7 @@ metodos modificados
 metodos nuevos"""
 
 class Animal:
-#Se ejecuta automáticamente cada vez que creas un objeto
+# Se ejecuta automáticamente cada vez que creas un objeto
 # de esa clase y sirve para inicializar sus atributos.
     def __init__(self, edad, color):
         self.edad = edad

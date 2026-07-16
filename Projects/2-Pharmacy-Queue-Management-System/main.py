@@ -9,6 +9,7 @@ while True:
     try:
         match Modulos.Menu():
             case 1: 
+                
                 module = Modulos.Elegir_Modulo()
                 if module == 1: Modulos.Medicina()
                 elif module == 2: Modulos.Cosmeticos()
