@@ -1,133 +1,126 @@
-# 🐍 Python Learning
+# Python-Learning 🐍
 
-Welcome! 👋
+A personal repository where I document my journey learning **Python** through theory, practical exercises, and small projects. The goal of this repository is to strengthen my programming fundamentals while building a solid foundation for more advanced topics such as software development, data science, and artificial intelligence.
 
-This repository documents my journey of learning **Python**, starting from the very basics and progressing to more advanced topics. The goal is to practice, experiment, and build a strong foundation in Python through examples, exercises, and small projects.
+## 📚 Topics Covered
 
-## 📚 Contents
+* Python Fundamentals
+* Strings and Operators
+* Loops and Control Flow
+* Functions
+* Arguments (`args` & `kwargs`)
+* Recursive Functions
+* Decorators
+* Generators
+* Data Structures
+* Collections Module
+* Object-Oriented Programming (OOP)
+* Inheritance
+* Multiple Inheritance
+* Polymorphism
+* File Manipulation
+* Modularity and Packages
+* Error Handling
+* Unit Testing
+* External Packages
+* Standard Library Modules
 
-This repository will continue to grow as I learn. Some of the topics covered include:
+  * `datetime`
+  * `time`
+  * `timeit`
+  * `os`
+  * `shutil`
+  * `send2trash`
 
-- ✅ Introduction to Python
-- ✅ Variables and Data Types
-- ✅ Operators
-- ✅ Input and Output
-- ✅ Conditional Statements (`if`, `elif`, `else`)
-- ✅ Loops (`for`, `while`)
-- ✅ Functions
-- ✅ Lists
-- ✅ Tuples
-- ✅ Dictionaries
-- ✅ Sets
-- ✅ Strings
-- ✅ File Handling
-- ✅ Modules and Packages
-- ✅ Object-Oriented Programming (OOP)
-- ✅ Exception Handling
-- ✅ Popular Libraries
-- ⏳ Practical Projects
-
----
-
-## 📂 Repository Structure
+## 📁 Repository Structure
 
 ```text
-Python-Learning-Journey/
+Python-Learning/
 │
-├── 01_Introduction/
-├── 02_Variables/
-├── 03_Operators/
-├── 04_Conditionals/
-├── 05_Loops/
-├── 06_Functions/
-├── 07_Collections/
-├── 08_Files/
-├── 09_OOP/
-├── 10_Projects/
-└── README.md
+├── Data-Structures/
+│   ├── Collections-Module/
+│   ├── Dictionaries.py
+│   ├── Lists.py
+│   ├── Tuples.py
+│   ├── Sets.py
+│   ├── Zip.py
+│   ├── Random.py
+│   ├── MinMax.py
+│   └── List compression.py
+│
+├── Error-Handling/
+│   ├── Error-Handling-Practice/
+│   └── Look-For-Errors/
+│       ├── Pylint/
+│       └── Unittest/
+│
+├── File-Manipulation/
+│
+├── Functions/
+│   ├── Introduction/
+│   ├── Defined-&-Undefined-Args/
+│   ├── Recursive-Functions/
+│   ├── Decorators/
+│   └── Generators/
+│
+├── Introduction/
+│   ├── Strings/
+│   ├── Operators/
+│   ├── Loops/
+│   └── Modules/
+│       ├── Datetime/
+│       ├── Os-Shutil/
+│       └── Time/
+│
+├── Modularity/
+│   ├── External-Packages/
+│   └── Modularity/
+│       └── Package-Example/
+│
+├── Object-Oriented-Programming/
+│   ├── Methods/
+│   ├── Inheritance/
+│   └── Polymorphism/
+│
+└── Projects/
+    ├── 1-Bank-Account/
+    └── 2-Pharmacy-Queue-Management-System/
 ```
 
-Each folder contains commented examples and exercises related to its topic.
+## 🚀 Projects
+
+### 🏦 Bank Account
+
+A console-based banking application developed to practice Object-Oriented Programming concepts such as classes, inheritance, methods, and encapsulation.
+
+### 💊 Pharmacy Queue Management System
+
+A pharmacy ticket management system that assigns customer turns using generators and decorators while organizing different service modules.
+
+## 🛠 Technologies
+
+* Python 3
+* Visual Studio Code
+* Git & GitHub
+
+## 🎯 Purpose
+
+This repository serves as a personal learning journal where I continuously upload new topics, exercises, and projects while improving my Python programming skills. As I progress, new folders and examples will be added covering more advanced concepts and real-world applications.
+
+## 📌 Future Topics
+
+* Regular Expressions (`re`)
+* NumPy
+* Pandas
+* Matplotlib
+* Tkinter
+* APIs
+* Multithreading
+* SQLite
+* Networking
+* Data Analysis
+* Machine Learning
 
 ---
 
-## 🚀 Goals
-
-- Learn Python syntax.
-- Understand the fundamentals of programming.
-- Solve exercises to reinforce concepts.
-- Build small practical projects.
-- Develop a strong foundation for learning fields such as:
-  - Data Science
-  - Artificial Intelligence
-  - Web Development
-  - Automation
-  - Quantum Computing
-
----
-
-## 🛠️ Requirements
-
-- Python 3.12 or later (recent Python 3 versions are also supported)
-- Visual Studio Code (recommended)
-- Python extension for VS Code
-
-Check your Python installation with:
-
-```bash
-python --version
-```
-
-or
-
-```bash
-python3 --version
-```
-
----
-
-## ▶️ Getting Started
-
-Clone the repository:
-
-```bash
-git clone https://github.com/your-username/python-learning-journey.git
-```
-
-Navigate to the project directory:
-
-```bash
-cd python-learning-journey
-```
-
-Run any Python file:
-
-```bash
-python filename.py
-```
-
----
-
-## 📖 Recommended Resources
-
-- Official Python Documentation: https://docs.python.org/3/
-- Python Tutor: https://pythontutor.com/
-- Real Python: https://realpython.com/
-
----
-
-## 🤝 Contributing
-
-This repository is primarily intended to document my personal learning journey. However, suggestions, improvements, and corrections are always welcome.
-
----
-
-## ⭐ Progress
-
-The repository will be continuously updated as I explore new Python concepts and complete additional exercises and projects.
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
+⭐ If you find this repository useful, feel free to leave a star.
