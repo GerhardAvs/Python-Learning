@@ -21,6 +21,11 @@ def exit_button(mouse_pos):
     Returns:
         bool: False si se presionó el botón de salir, True en caso contrario.
     """
+    if not config.btnSalir_rect.collidepoint(mouse_pos):
+        return False
 
-def exit_button(mouse_pos):
-    return config.btnSalir_rect.collidepoint(mouse_pos)
+    # posición del mouse relativa a la esquina del botón
+    x = mouse_pos[0] - config.btnSalir_rect.x
+    y = mouse_pos[1] - config.btnSalir_rect.y
+
+    return config.btnSalir_mask.get_at((x, y)) != 0
