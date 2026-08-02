@@ -64,7 +64,7 @@ cat_path = "Resources\\images\\gato.png"
 cat_img = pygame.image.load(cat_path)
 cat_img = pygame.transform.smoothscale(cat_img, settings.CAT_SIZE)
 
-cat_pos_x, cat_pos_y = cat.cat_spawn_outside_screen()
+#cat_pos_x, cat_pos_y = cat.cat_spawn_outside_screen()
 
 dx_cat = 0
 dy_cat = 0
