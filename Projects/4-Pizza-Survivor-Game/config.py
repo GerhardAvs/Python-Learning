@@ -11,14 +11,14 @@ icon = pygame.image.load(icon_path)
 btnSalir_path = "Resources\\images\\BtnSalir.png"
 
 btnSalir_img = pygame.image.load(btnSalir_path)
-btnSalir_img = pygame.transform.scale(btnSalir_img, settings.BTN_EXIT_SIZE)
+btnSalir_img = pygame.transform.smoothscale(btnSalir_img, settings.BTN_EXIT_SIZE)
 
 
 #/////////////////////////////////////////  Cargar Fondo ///////////////////////////////////////////////////////
 bakground_path = "Resources\\images\\fondo.png"
 
 background = pygame.image.load(bakground_path)
-background = pygame.transform.scale(background, settings.WINDOW_SIZE) #Escala, rotacion 
+background = pygame.transform.smoothscale(background, settings.WINDOW_SIZE) #Escala, rotacion 
 
 
 #///////////////////////////////////  Cargar Personaje (repartidor) ///////////////////////////////////////////////////////
@@ -26,7 +26,7 @@ delivery_path = "Resources\\images\\didi_delivery.png"
 #Ajusta la escala (128,200) window_size[0]/15, window_size[1]/5.4
 
 delivery_img = pygame.image.load(delivery_path)
-delivery_img = pygame.transform.scale(delivery_img, settings.DELIVERY_SIZE)
+delivery_img = pygame.transform.smoothscale(delivery_img, settings.DELIVERY_SIZE)
 delivery_mask = pygame.mask.from_surface(delivery_img)
 
 
@@ -43,7 +43,7 @@ delivery_last_hit_time = 0
 #////////////////////////////////////////  Lanzamiento de pizzas ///////////////////////////////////////////////////////
 pizza_path = "Resources\\images\\pizza.png"
 pizza_img = pygame.image.load(pizza_path)
-pizza_img = pygame.transform.scale(pizza_img, settings.PIZZA_SIZE)
+pizza_img = pygame.transform.smoothscale(pizza_img, settings.PIZZA_SIZE)
 pizza_mask = pygame.mask.from_surface(pizza_img)
 
 
@@ -55,7 +55,7 @@ dog_path = "Resources\\images\\perro.png"
 #Ajusta la escala (108,128) window_size[0]/17.777, window_size[1]/8.43
 
 dog_img = pygame.image.load(dog_path)
-dog_img = pygame.transform.scale(dog_img, settings.DOG_SIZE)
+dog_img = pygame.transform.smoothscale(dog_img, settings.DOG_SIZE)
 dog_mask = pygame.mask.from_surface(dog_img)
 
 def dog_spawn_outside_screen():
@@ -87,9 +87,9 @@ dog_death_time = 0
 #////////////////////////////////////////    Cargar Corazones (vidas)  ///////////////////////////////////////
 corazon_path = "Resources\\images\\corazon.png"
 
-corazon_img_full = pygame.transform.scale(pygame.image.load(corazon_path), settings.HEART_SIZE_FULL)
-corazon_img_medium = pygame.transform.scale(pygame.image.load(corazon_path), settings.HEART_SIZE_MEDIUM)
-corazon_img_small = pygame.transform.scale(pygame.image.load(corazon_path), settings.HEART_SIZE_SMALL)
+corazon_img_full = pygame.transform.smoothscale(pygame.image.load(corazon_path), settings.HEART_SIZE_FULL)
+corazon_img_medium = pygame.transform.smoothscale(pygame.image.load(corazon_path), settings.HEART_SIZE_MEDIUM)
+corazon_img_small = pygame.transform.smoothscale(pygame.image.load(corazon_path), settings.HEART_SIZE_SMALL)
 
 # fila de 3 corazones en la esquina superior derecha (antes ahí estaba el botón de salir)
 _hearts_total_width = 3 * settings.HEART_SLOT_SIZE[0] + 2 * settings.HEART_SPACING
@@ -124,6 +124,6 @@ menu_button_rects = [
 ]
 
 # reutilizamos el ícono del botón de salir original, como acento visual dentro del botón "Salir" del menú
-menu_salir_icon_img = pygame.transform.scale(btnSalir_img, settings.MENU_ICON_SIZE)
+menu_salir_icon_img = pygame.transform.smoothscale(btnSalir_img, settings.MENU_ICON_SIZE)
 
 #////////////////////////////////////////    Cargar Gato ///////////////////////////////////////////////////////
