@@ -1,18 +1,11 @@
 import pygame
 import settings
-from random import randint, choice
+from Entities import dog,cat
 
 #///////////////////////////////////  Nombre de la app & Icono de la app ////////////////////////////////////////////////////
 window_origin = (0,0)
 icon_path = "Resources\\images\\pizza.png"
 icon = pygame.image.load(icon_path)
-
-#///////////////////////////////////////  ícono de salir (ahora vive dentro del menú de pausa) ///////////////////
-btnSalir_path = "Resources\\images\\BtnSalir.png"
-
-btnSalir_img = pygame.image.load(btnSalir_path)
-btnSalir_img = pygame.transform.smoothscale(btnSalir_img, settings.BTN_EXIT_SIZE)
-
 
 #/////////////////////////////////////////  Cargar Fondo ///////////////////////////////////////////////////////
 bakground_path = "Resources\\images\\fondo.png"
@@ -22,7 +15,7 @@ background = pygame.transform.smoothscale(background, settings.WINDOW_SIZE) #Esc
 
 
 #///////////////////////////////////  Cargar Personaje (repartidor) ///////////////////////////////////////////////////////
-delivery_path = "Resources\\images\\didi_delivery.png"
+delivery_path = "Resources\\images\\repartidor.png"
 #Ajusta la escala (128,200) window_size[0]/15, window_size[1]/5.4
 
 delivery_img = pygame.image.load(delivery_path)
@@ -58,24 +51,7 @@ dog_img = pygame.image.load(dog_path)
 dog_img = pygame.transform.smoothscale(dog_img, settings.DOG_SIZE)
 dog_mask = pygame.mask.from_surface(dog_img)
 
-def dog_spawn_outside_screen():
-    """
-    Elige un punto random sobre uno de los 4 bordes de la pantalla, pero
-    completamente fuera de ella (el sprite no se llega a ver), para que
-    el perro "entre solo" caminando a buscar al repartidor.
-    """
-    ancho, alto = settings.WINDOW_SIZE
-    borde = choice(["arriba", "abajo", "izquierda", "derecha"])
-
-    if borde == "arriba":
-        return randint(0, int(ancho - settings.DOG_SIZE[0])), -settings.DOG_SIZE[1]
-    if borde == "abajo":
-        return randint(0, int(ancho - settings.DOG_SIZE[0])), alto
-    if borde == "izquierda":
-        return -settings.DOG_SIZE[0], randint(0, int(alto - settings.DOG_SIZE[1]))
-    return ancho, randint(0, int(alto - settings.DOG_SIZE[1]))
-
-dog_pos_x, dog_pos_y = dog_spawn_outside_screen()
+dog_pos_x, dog_pos_y = dog.dog_spawn_outside_screen()
 
 dx_dog = 0
 dy_dog = 0
@@ -83,7 +59,16 @@ distance_dog = 0
 
 dog_alive = True
 dog_death_time = 0
+#////////////////////////////////////////    Cargar Gato ///////////////////////////////////////////////////////
+cat_path = "Resources\\images\\gato.png"
+cat_img = pygame.image.load(cat_path)
+cat_img = pygame.transform.smoothscale(cat_img, settings.CAT_SIZE)
 
+cat_pos_x, cat_pos_y = cat.cat_spawn_outside_screen()
+
+dx_cat = 0
+dy_cat = 0
+distance_cat = 0
 #////////////////////////////////////////    Cargar Corazones (vidas)  ///////////////////////////////////////
 corazon_path = "Resources\\images\\corazon.png"
 
@@ -123,7 +108,4 @@ menu_button_rects = [
     for i in range(3)
 ]
 
-# reutilizamos el ícono del botón de salir original, como acento visual dentro del botón "Salir" del menú
-menu_salir_icon_img = pygame.transform.smoothscale(btnSalir_img, settings.MENU_ICON_SIZE)
 
-#////////////////////////////////////////    Cargar Gato ///////////////////////////////////////////////////////

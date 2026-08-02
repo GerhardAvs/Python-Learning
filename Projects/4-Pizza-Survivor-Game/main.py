@@ -5,7 +5,7 @@ pygame.init()
 
 import config, settings
 from Entities import delivery,dog, pizza
-from UI import hearts, menu
+from UI import hearts, pause_menu
 from System import collisions
 
 
@@ -41,7 +41,7 @@ while still_playing:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if config.game_paused:
                 if event.button == 1: #Clic izquierdo del mouse
-                    accion = menu.handle_menu_click(event.pos)
+                    accion = pause_menu.handle_menu_click(event.pos)
                     if accion == "reanudar":
                         config.game_paused = False
                     elif accion == "salir":
@@ -66,7 +66,7 @@ while still_playing:
         
         #////////////////////// Mover / respawnear al perro /////////////////////////////////////////////       
         dog.update_dog()
-
+        
         #////////////////////// Mover pizzas y limpiar las que salieron de pantalla /////////////////////
         pizza.move_pizzas()
         pizza.remove_offscreen_pizzas()
@@ -85,7 +85,7 @@ while still_playing:
 
     #////////////////////// Menú de pausa (se dibuja arriba de todo) ///////////////////////////////////
     if config.game_paused:
-        menu.draw_pause_menu()
+        pause_menu.draw_pause_menu()
 
     pygame.display.update()
 

@@ -29,16 +29,15 @@ def get_delivery_movement(event):
         """
         if event == pygame.K_a:
                 config.delivery_change_pos_x = -settings.DELIVERY_SPEED
-                print('izq')
+                
         if event == pygame.K_d:
                 config.delivery_change_pos_x = settings.DELIVERY_SPEED
-                print('right')
+                
         if event == pygame.K_w:
                 config.delivery_change_pos_y = -settings.DELIVERY_SPEED
-                print('up')
+                
         if event == pygame.K_s:
                 config.delivery_change_pos_y = settings.DELIVERY_SPEED
-                print('down')
                 
 def reset_delivery_movement(event):
         """

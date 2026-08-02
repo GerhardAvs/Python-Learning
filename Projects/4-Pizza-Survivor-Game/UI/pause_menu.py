@@ -26,13 +26,6 @@ def draw_pause_menu():
         texto_rect = texto.get_rect(center=rect.center)
         config.pantalla.blit(texto, texto_rect)
 
-    # ícono del botón de salir original, como acento visual dentro del botón "Salir"
-    salir_rect = config.menu_button_rects[2]
-    icono_rect = config.menu_salir_icon_img.get_rect(
-        midright=(salir_rect.right - 16, salir_rect.centery)
-    )
-    config.pantalla.blit(config.menu_salir_icon_img, icono_rect)
-
 
 def handle_menu_click(mouse_pos):
     """
