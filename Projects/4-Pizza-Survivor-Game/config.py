@@ -108,4 +108,8 @@ menu_button_rects = [
     for i in range(3)
 ]
 
+#///////////////////////////////////////// Restart menu  ///////////////////////////////////////////////////
+"""menu_font = pygame.font.SysFont(None, 40)
 
+menu_button_labels = ["Reiniciar", "Cambiar de traje", "Salir"]
+menu_button_actions = ["reiniciar", "traje", "salir"]"""
