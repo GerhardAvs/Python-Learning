@@ -1,6 +1,6 @@
 import pygame
+
 import settings
-from Entities import dog,cat
 
 #///////////////////////////////////  Nombre de la app & Icono de la app ////////////////////////////////////////////////////
 window_origin = (0,0)
@@ -15,7 +15,7 @@ background = pygame.transform.smoothscale(background, settings.WINDOW_SIZE) #Esc
 
 
 #///////////////////////////////////  Cargar Personaje (repartidor) ///////////////////////////////////////////////////////
-delivery_path = "Resources\\images\\repartidor.png"
+delivery_path = "Resources\\images\\Delivery_Skins\\didi_delivery.png"
 #Ajusta la escala (128,200) window_size[0]/15, window_size[1]/5.4
 
 delivery_img = pygame.image.load(delivery_path)
@@ -46,29 +46,13 @@ last_pizza_throw = 0
 #//////////////////////////////////////    Cargar Perro ///////////////////////////////////////////////////////
 dog_path = "Resources\\images\\perro.png"
 #Ajusta la escala (108,128) window_size[0]/17.777, window_size[1]/8.43
+# La imagen, la máscara, si está vivo y su tiempo de muerte ahora
+# viven dentro de la instancia de Enemy (ver System/game.py: dog = Enemy(...)).
 
-dog_img = pygame.image.load(dog_path)
-dog_img = pygame.transform.smoothscale(dog_img, settings.DOG_SIZE)
-dog_mask = pygame.mask.from_surface(dog_img)
 
-dog_pos_x, dog_pos_y = dog.dog_spawn_outside_screen()
-
-dx_dog = 0
-dy_dog = 0
-distance_dog = 0
-
-dog_alive = True
-dog_death_time = 0
 #////////////////////////////////////////    Cargar Gato ///////////////////////////////////////////////////////
 cat_path = "Resources\\images\\gato.png"
-cat_img = pygame.image.load(cat_path)
-cat_img = pygame.transform.smoothscale(cat_img, settings.CAT_SIZE)
 
-#cat_pos_x, cat_pos_y = cat.cat_spawn_outside_screen()
-
-dx_cat = 0
-dy_cat = 0
-distance_cat = 0
 #////////////////////////////////////////    Cargar Corazones (vidas)  ///////////////////////////////////////
 corazon_path = "Resources\\images\\corazon.png"
 

@@ -1,5 +1,7 @@
 import pygame
-import config, settings
+
+import config
+import settings
 
 
 def draw_delivery(pos_x, pos_y):   

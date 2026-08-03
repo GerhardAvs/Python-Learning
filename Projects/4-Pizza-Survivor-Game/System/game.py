@@ -1,15 +1,28 @@
 import pygame
 
 import config
-from Entities import delivery,dog, pizza
-from UI import hearts, pause_menu
+import settings
+from Entities import Cat, Dog, delivery, pizza
 from System import collisions
+from UI import hearts, pause_menu
 
-class Game():
+dog = Dog()
+cat = Cat()
+
+class Game:
     def __init__(self):
+        """constructor de la clase Game
+        """
         self.playing = True
- 
-    def running(self):
+        
+        config.pantalla = pygame.display.set_mode(settings.WINDOW_SIZE, pygame.FULLSCREEN)
+        config.pantalla.blit(config.background, config.window_origin)
+        pygame.display.set_caption("Pizza Survivor")
+        pygame.display.set_icon(config.icon)
+
+    def run(self):
+        """Bucle principal del juego: maneja eventos, actualiza y dibuja.
+        """
         while self.playing:
         
             self.handle_events()
@@ -19,22 +32,21 @@ class Game():
             self.draw()
     
     def handle_events(self):
+        """Maneja las entradas de teclado, raton para interactuar con la UI
+        """
         for event in pygame.event.get():
-                if event.type == pygame.QUIT: 
+                if event.type == pygame.QUIT:
                     self.playing = False
                     
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         config.game_paused = not config.game_paused
-                    if event.key == pygame.K_e:
-                        ... #Despliega menu de poderes (no implementado)
         
                     if not config.game_paused:
                         delivery.get_delivery_movement(event.key)
                 
-                if event.type == pygame.KEYUP:
-                    if not config.game_paused:
-                        delivery.reset_delivery_movement(event.key)
+                if event.type == pygame.KEYUP and not config.game_paused:
+                    delivery.reset_delivery_movement(event.key)
                     
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if config.game_paused:
@@ -53,36 +65,40 @@ class Game():
                             ... #Despliega algun poder especial del repartidor que se encuentre en el suelo (no implementado)
         
     def update(self):
+        """Actualiza la lógica del juego: movimiento de repartidor, perro, pizzas, colisiones, etc.
+        """
             #////////////////////// Si el juego está pausado, no se actualiza nada (queda "congelado") ////////////
+
         if not config.game_paused:
-            #////////////////////// Mueve y restringe al repartidor //////////////////////////////////////////       
             delivery.delivery_restrictions()
             delivery.move_delivery()
-            
+
             #////////////////////// Mover / respawnear al perro /////////////////////////////////////////////       
-            dog.update_dog()
             
-            #////////////////////// Mover pizzas y limpiar las que salieron de pantalla /////////////////////
             pizza.move_pizzas()
             pizza.remove_offscreen_pizzas()
 
             #////////////////////// Detecta si alguna pizza tocó al perro (colisión por máscara) ///////////
-            collisions.resolve_pizza_dog_collisions()
+            for enemy_instance in [dog, cat]:
+                enemy_instance.update()
+                collisions.resolve_pizza_enemy_collisions(enemy_instance)
+                collisions.resolve_enemy_delivery_collision(enemy_instance)
 
-            #////////////////////// Detecta si el perro tocó al repartidor (resta una vida) /////////////////
-            collisions.resolve_dog_delivery_collision()
-                        
     def draw(self):
+        """Dibuja todos los elementos del juego en la pantalla: fondo, repartidor, perro, pizzas, corazones, menú de pausa."""
+        
         #/////////////////////inicializa al repartidor, perro, pizzas, ... //////////////////////////////////
         config.pantalla.blit(config.background, config.window_origin) 
         delivery.draw_delivery(config.delivery_pos_x, config.delivery_pos_y)
-        dog.draw_dog(config.dog_pos_x, config.dog_pos_y)
         pizza.draw_pizzas()
         hearts.draw_hearts()
+        for enemy_instance in [dog, cat]:
+            enemy_instance.draw()
 
         #////////////////////// Menú de pausa (se dibuja arriba de todo) ///////////////////////////////////
         if config.game_paused:
             pause_menu.draw_pause_menu()
+            
         pygame.display.update()
 
 

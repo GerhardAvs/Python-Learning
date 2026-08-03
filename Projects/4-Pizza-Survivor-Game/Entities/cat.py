@@ -1,16 +1,10 @@
 import pygame
-import config, settings
 
-def draw_cat(pos_x, pos_y):
-    """
-    Dibuja el gato en la pantalla en la posición especificada.
-    
-    Args:
-        pos_x (int): La coordenada x para la posición del gato.
-        pos_y (int): La coordenada y para la posición del gato.
-    """
-    config.pantalla.blit(config.cat_img, (pos_x, pos_y))
-    
+import config
+import settings
+from Entities.enemy import Enemy
 
-def cat_spawn_outside_screen():
-    ...
+
+class Cat(Enemy):
+    def __init__(self):
+        super().__init__(config.cat_path, settings.CAT_SPEED, settings.CAT_SIZE, settings.CAT_RESPAWN_DELAY)

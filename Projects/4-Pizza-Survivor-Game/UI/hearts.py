@@ -1,18 +1,22 @@
 import pygame
-import config, settings
 
+import config
+import settings
 
 def _select_heart_image(lives_in_heart):
     """
     Devuelve la imagen que corresponde según cuántas vidas le quedan
     a ESE corazón puntual (0 a 3). None = el corazón ya se gastó.
     """
+
+    
     if lives_in_heart >= 3:
         return config.corazon_img_full
     if lives_in_heart == 2:
         return config.corazon_img_medium
     if lives_in_heart == 1:
         return config.corazon_img_small
+    
     return None
 
 
@@ -32,7 +36,6 @@ def draw_hearts():
         0 vidas restantes -> desaparece
     """
     golpes_recibidos = settings.DELIVERY_LIVES - config.delivery_lives
-
     for i, (slot_x, slot_y) in enumerate(config.hearts_slot_positions):
         golpes_de_este_corazon = max(0, min(3, golpes_recibidos - i * 3))
         lives_in_heart = 3 - golpes_de_este_corazon
