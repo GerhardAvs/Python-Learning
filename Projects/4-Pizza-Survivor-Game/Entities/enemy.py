@@ -6,26 +6,36 @@ import config
 import settings
 
 
+##
+# @file enemy.py
+# @brief Implementa la clase base de los enemigos del juego.
+#
+# Este módulo define la clase Enemy, utilizada como base para
+# todos los enemigos (como perros y gatos). Proporciona la
+# funcionalidad común para el movimiento, dibujo, colisiones,
+# reaparición y cálculo de la posición.
+
 class Enemy:
-    """
-    Clase base para un enemigo que persigue al repartidor.
-
-    Es autocontenida: carga su propia imagen, escala y máscara de
-    colisión, y guarda su propio estado (posición, vivo/muerto, tiempo
-    de muerte). No depende de variables globales tipo config.dog_*,
-    por lo que puede instanciarse varias veces (perro, gato, etc.)
-    sin que una instancia pise el estado de otra.
-    """
-
+    ##
+    # @brief Clase base para los enemigos del juego.
+    #
+    # Cada enemigo administra su propia imagen, máscara de colisión,
+    # posición, velocidad, estado de vida y tiempo de reaparición.
+    # La clase está diseñada para ser heredada por tipos específicos
+    # de enemigos como Dog y Cat.
+    #
+    # @note Cada instancia mantiene su propio estado, permitiendo
+    # múltiples enemigos simultáneamente.
     def __init__(self, image_path, speed, size, respawn_delay, points):
-        """
-        Args:
-            image_path (str): ruta de la imagen del enemigo.
-            speed (int|float): velocidad de movimiento hacia el repartidor.
-            size (tuple[int, int]): tamaño (ancho, alto) al que se escala la imagen.
-            respawn_delay (int): milisegundos que tarda en reaparecer tras morir.
-            points (int): puntos que otorga al jugador cuando muere.
-        """
+        ##
+        # @brief Inicializa un nuevo enemigo.
+        #
+        # @param image_path Ruta de la imagen del enemigo.
+        # @param speed Velocidad de movimiento hacia el repartidor.
+        # @param size Tamaño al que se escalará la imagen.
+        # @param respawn_delay Tiempo de espera antes de reaparecer, en milisegundos.
+        # @param points Puntaje otorgado al eliminar este enemigo.
+        # @return None
         self.image = pygame.image.load(image_path)
         self.image = pygame.transform.smoothscale(self.image, size)
         self.mask = pygame.mask.from_surface(self.image)
@@ -41,39 +51,65 @@ class Enemy:
 
     @property
     def pos(self):
-        """Posición actual como tupla (x, y), útil para colisiones."""
+        ##
+        # @brief Obtiene la posición actual del enemigo.
+        #
+        # @return tuple Tupla (x, y) con la posición del enemigo.
         return (self.pos_x, self.pos_y)
 
+    ##
+    # @brief Dibuja el enemigo en la pantalla.
+    #
+    # El enemigo solo se dibuja cuando está vivo.
+    #
+    # @return None
     def draw(self):
-        """Dibuja al enemigo en pantalla si está vivo."""
         if self.alive:
             config.pantalla.blit(self.image, (self.pos_x, self.pos_y))
 
+    ##
+    # @brief Calcula la distancia entre el enemigo y el repartidor.
+    #
+    # @return tuple Tupla con (dx, dy, distancia).
     def _distance_to_delivery(self):
-        """Calcula (dx, dy, distancia) desde el enemigo hasta el repartidor."""
         dx = config.delivery_pos_x - self.pos_x
         dy = config.delivery_pos_y - self.pos_y
         distance = (dx ** 2 + dy ** 2) ** 0.5
         return dx, dy, distance
 
+    ##
+    # @brief Mueve el enemigo hacia el repartidor.
+    #
+    # El movimiento se realiza en línea recta utilizando la velocidad
+    # configurada para el enemigo.
+    #
+    # @return None
     def _move_towards_delivery(self):
-        """Mueve al enemigo un paso (según su velocidad) hacia el repartidor."""
         dx, dy, distance = self._distance_to_delivery()
         if distance > 0:
             self.pos_x += (dx / distance) * self.speed
             self.pos_y += (dy / distance) * self.speed
 
+    ##
+    # @brief Elimina temporalmente al enemigo.
+    #
+    # Cambia el estado del enemigo a muerto e inicia el contador
+    # para su futura reaparición.
+    #
+    # @return None
     def kill(self):
-        """Mata al enemigo y arranca el temporizador de respawn."""
         self.alive = False
         self.death_time = pygame.time.get_ticks()
 
+    ##
+    # @brief Actualiza el estado del enemigo.
+    #
+    # Si el enemigo está vivo, se mueve hacia el repartidor.
+    # Si está muerto y ha transcurrido el tiempo de reaparición,
+    # vuelve a aparecer en un borde aleatorio de la pantalla.
+    #
+    # @return None
     def update(self):
-        """
-        Si el enemigo está vivo, lo mueve hacia el repartidor.
-        Si está muerto, espera respawn_delay y lo hace reaparecer
-        afuera de la pantalla, en un borde random.
-        """
         if self.alive:
             self._move_towards_delivery()
         else:
@@ -82,12 +118,15 @@ class Enemy:
                 self.pos_x, self.pos_y = self._spawn_outside_screen()
                 self.alive = True
 
+    ##
+    # @brief Genera una posición inicial fuera de la pantalla.
+    #
+    # Selecciona aleatoriamente uno de los cuatro bordes de la
+    # ventana para que el enemigo aparezca completamente fuera
+    # de la pantalla y entre caminando.
+    #
+    # @return tuple Tupla (x, y) con la posición inicial.
     def _spawn_outside_screen(self):
-        """
-        Elige un punto random sobre uno de los 4 bordes de la pantalla, pero
-        completamente fuera de ella (el sprite no se llega a ver), para que
-        el enemigo "entre solo" caminando a buscar al repartidor.
-        """
         ancho, alto = settings.WINDOW_SIZE
         borde = choice(["arriba", "abajo", "izquierda", "derecha"])
 
