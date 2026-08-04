@@ -13,7 +13,7 @@ def check_mask_collision(pos1, mask1, pos2, mask2):
     return mask1.overlap(mask2, offset) is not None
 
 
-def resolve_pizza_enemy_collisions(enemy):
+def resolve_pizza_enemy_collisions(enemy, sounds):
     """
     Revisa todas las pizzas activas contra un enemigo (si está vivo).
     Si alguna pizza lo toca: elimina esa pizza y mata al enemigo
@@ -21,6 +21,7 @@ def resolve_pizza_enemy_collisions(enemy):
 
     Args:
         enemy (Enemy): instancia del enemigo a revisar (dog, cat, etc.).
+        sounds (SoundManager): usado para reproducir el sonido de golpe.
     """
     if not enemy.alive:
         return
@@ -30,16 +31,27 @@ def resolve_pizza_enemy_collisions(enemy):
     for pizza in config.pizzas:
         pizza_pos = (pizza["x"], pizza["y"])
         if enemy.alive and check_mask_collision(pizza_pos, config.pizza_mask, enemy.pos, enemy.mask):
-            enemy.kill()
+            _kill_enemy(enemy, sounds)
         else:
             pizzas_restantes.append(pizza)
 
     config.pizzas = pizzas_restantes
 
 
-def resolve_enemy_delivery_collision(enemy):
+def _kill_enemy(enemy, sounds):
     """
-    Si el enemigo toca al repartidor, resta 1 vida (config.delivery_lives).
+    Mata al enemigo, suma sus puntos al marcador (config.score) y
+    reproduce el sonido de golpe.
+    """
+    enemy.kill()
+    config.score += enemy.points
+    sounds.play_sound("enemy_hit")
+
+
+def resolve_enemy_delivery_collision(enemy, sounds):
+    """
+    Si el enemigo toca al repartidor, resta 1 vida (config.delivery_lives)
+    y reproduce el sonido de vida perdida.
 
     Usa DELIVERY_HIT_COOLDOWN para no descontar vidas en cada frame
     mientras el enemigo se queda pegado al repartidor (sin esto, 9 vidas
@@ -47,6 +59,7 @@ def resolve_enemy_delivery_collision(enemy):
 
     Args:
         enemy (Enemy): instancia del enemigo a revisar (dog, cat, etc.).
+        sounds (SoundManager): usado para reproducir el sonido de vida perdida.
     """
     if not enemy.alive or config.delivery_lives <= 0:
         return
@@ -60,3 +73,4 @@ def resolve_enemy_delivery_collision(enemy):
     if check_mask_collision(enemy.pos, enemy.mask, delivery_pos, config.delivery_mask):
         config.delivery_lives = max(0, config.delivery_lives - 1)
         config.delivery_last_hit_time = ahora
+        sounds.play_sound("lost_life")

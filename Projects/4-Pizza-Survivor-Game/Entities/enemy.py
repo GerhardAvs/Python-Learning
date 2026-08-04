@@ -17,13 +17,14 @@ class Enemy:
     sin que una instancia pise el estado de otra.
     """
 
-    def __init__(self, image_path, speed, size, respawn_delay):
+    def __init__(self, image_path, speed, size, respawn_delay, points):
         """
         Args:
             image_path (str): ruta de la imagen del enemigo.
             speed (int|float): velocidad de movimiento hacia el repartidor.
             size (tuple[int, int]): tamaño (ancho, alto) al que se escala la imagen.
             respawn_delay (int): milisegundos que tarda en reaparecer tras morir.
+            points (int): puntos que otorga al jugador cuando muere.
         """
         self.image = pygame.image.load(image_path)
         self.image = pygame.transform.smoothscale(self.image, size)
@@ -32,6 +33,7 @@ class Enemy:
         self.speed = speed
         self.size = size
         self.respawn_delay = respawn_delay
+        self.points = points
 
         self.pos_x, self.pos_y = self._spawn_outside_screen()
         self.alive = True

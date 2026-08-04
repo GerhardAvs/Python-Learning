@@ -3,6 +3,7 @@ import pygame
 import config
 import settings
 
+
 def _select_heart_image(lives_in_heart):
     """
     Devuelve la imagen que corresponde según cuántas vidas le quedan

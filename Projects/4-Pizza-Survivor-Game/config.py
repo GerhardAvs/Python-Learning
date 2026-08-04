@@ -52,7 +52,9 @@ dog_path = "Resources\\images\\perro.png"
 
 #////////////////////////////////////////    Cargar Gato ///////////////////////////////////////////////////////
 cat_path = "Resources\\images\\gato.png"
-
+#Ajusta la escala (108,128) window_size[0]/17.777, window_size[1]/8.43
+# La imagen, la máscara, si está vivo y su tiempo de muerte ahora
+# viven dentro de la instancia de Enemy (ver System/game.py: dog = Enemy(...))
 #////////////////////////////////////////    Cargar Corazones (vidas)  ///////////////////////////////////////
 corazon_path = "Resources\\images\\corazon.png"
 
@@ -93,7 +95,25 @@ menu_button_rects = [
 ]
 
 #///////////////////////////////////////// Restart menu  ///////////////////////////////////////////////////
-"""menu_font = pygame.font.SysFont(None, 40)
+# Usa los mismos rects que el menu de pausa (config.menu_button_rects), solo cambian
+# las etiquetas/acciones porque aqui no existe "reanudar", existe "reiniciar".
+restart_menu_button_labels = ["Reiniciar", "Cambiar de traje", "Salir"]
+restart_menu_button_actions = ["reiniciar", "traje", "salir"]
 
-menu_button_labels = ["Reiniciar", "Cambiar de traje", "Salir"]
-menu_button_actions = ["reiniciar", "traje", "salir"]"""
+#/////////////////////////////////////////// Sounds /////////////////////////////////////////////////////
+# NOTA: "hit_2_delivery" y "background_music" tenian las rutas cruzadas
+# (el de musica de fondo apuntaba a "golpe.mp3" y viceversa). Se corrigio
+# y ademas se renombro a "enemy_hit_path", que es lo que realmente es:
+# el sonido que suena cuando una pizza golpea al perro/gato.
+pizza_throw_path = "Resources\\sounds\\disparo.mp3"
+enemy_hit_path = "Resources\\sounds\\golpe.mp3"
+background_music_path = "Resources\\sounds\\MusicaFondo.mp3"
+lost_life_path = "Resources\\sounds\\vida_perdida.mp3"
+
+#/////////////////////////////////////////// Puntaje ////////////////////////////////////////////////////
+score = 0
+score_font = pygame.font.SysFont(None, settings.SCORE_FONT_SIZE)
+
+#/////////////////////////////////////////// Estado de la partida //////////////////////////////////////
+game_over = False
+

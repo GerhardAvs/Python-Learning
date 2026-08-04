@@ -9,8 +9,7 @@ def draw_pizzas():
     for p in config.pizzas:
         config.pantalla.blit(config.pizza_img, (p["x"], p["y"]))
 
-                
-                
+
 def launch_pizza(click_pos):
     """
     Dispara una pizza desde el repartidor hacia el punto donde se hizo click.
@@ -18,10 +17,16 @@ def launch_pizza(click_pos):
     - Respeta el cooldown TIEMPO_ENTRE_PIZZAS (2s) entre disparos.
     - La pizza NO nace en el centro del repartidor: nace en el borde del
       repartidor, del lado hacia donde se disparó.
+
+    Returns:
+        bool: True si la pizza se lanzó de verdad, False si no (por el
+        cooldown activo o por hacer click justo sobre el repartidor).
+        Quien llame a esta función debe usar este valor para decidir si
+        reproduce el sonido de disparo o no.
     """
     ahora = pygame.time.get_ticks()
     if ahora - config.last_pizza_throw < settings.TIME_BETWEEN_PIZZAS:
-        return
+        return False
     config.last_pizza_throw = ahora
 
     # Centro real del repartidor (pos_x/pos_y son la esquina, por eso sumamos medio ancho/alto)
@@ -33,7 +38,7 @@ def launch_pizza(click_pos):
     distancia = (dx**2 + dy**2)**0.5
 
     if distancia == 0:
-        return
+        return False
 
     # Vector unitario de dirección del disparo
     dir_x = dx / distancia
@@ -49,13 +54,15 @@ def launch_pizza(click_pos):
         "dx": dir_x * settings.PIZZA_SPEED,
         "dy": dir_y * settings.PIZZA_SPEED,
     })
-    
+    return True
+
+
 def move_pizzas():
     """Mueve todas las pizzas activas en línea recta según su dirección."""
     for p in config.pizzas:
         p["x"] += p["dx"]
         p["y"] += p["dy"]
-        
+
 def remove_offscreen_pizzas():
     """Elimina las pizzas que ya salieron de la pantalla, para no acumularlas en memoria."""
     ancho, alto = settings.WINDOW_SIZE
